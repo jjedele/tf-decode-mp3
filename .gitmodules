@@ -1,0 +1,3 @@
+[submodule "cc/minimp3"]
+	path = cc/minimp3
+	url = https://github.com/lieff/minimp3.git
