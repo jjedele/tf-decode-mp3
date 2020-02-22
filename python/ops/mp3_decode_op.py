@@ -19,4 +19,4 @@ from tensorflow.python.platform import resource_loader
 
 mp3_decode_op = load_library.load_op_library(
     resource_loader.get_path_to_datafile("_mp3_decode_op.so"))
-mp3_decode = mp3_decode_op.zero_out
+mp3_decode = mp3_decode_op.mp3_decode

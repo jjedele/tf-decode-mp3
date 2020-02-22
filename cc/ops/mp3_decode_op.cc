@@ -16,9 +16,9 @@ limitations under the License.
 using namespace tensorflow;
 
 REGISTER_OP("Mp3Decode")
-    .Input("encoded: int32")
-    .Output("samples: int32")
+    .Input("encoded: string")
+    .Output("samples: int16")
     .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
-      c->set_output(0, c->input(0));
+      c->set_output(0, c->UnknownShape());
       return Status::OK();
     });
