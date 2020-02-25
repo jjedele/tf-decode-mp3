@@ -17,7 +17,7 @@ using namespace tensorflow;
 
 REGISTER_OP("Mp3Decode")
     .Input("encoded: string")
-    .Output("samples: int16")
+    .Output("samples: float32")
     .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
       c->set_output(0, c->UnknownShape());
       return Status::OK();
