@@ -4,10 +4,9 @@ from decode_mp3_op import decode_mp3
 
 
 class DecodeMp3Test(tf.test.TestCase):
-
     def test_decode_mp3_normal(self):
         with self.session():
-            data = tf.io.read_file("../../testfiles/sine440_cbr128.mp3")
+            data = tf.io.read_file("../../../testfiles/sine440_cbr128.mp3")
 
             samples, sr = decode_mp3(data)
 
@@ -16,7 +15,7 @@ class DecodeMp3Test(tf.test.TestCase):
 
     def test_decode_mp3_mono_to_stereo(self):
         with self.session():
-            data = tf.io.read_file("../../testfiles/sine440_cbr128.mp3")
+            data = tf.io.read_file("../../../testfiles/sine440_cbr128.mp3")
 
             samples, sr = decode_mp3(data, desired_channels=2)
 
@@ -26,7 +25,7 @@ class DecodeMp3Test(tf.test.TestCase):
 
     def test_decode_mp3_cut_samples(self):
         with self.session():
-            data = tf.io.read_file("../../testfiles/sine440_cbr128.mp3")
+            data = tf.io.read_file("../../../testfiles/sine440_cbr128.mp3")
 
             samples_original, _ = decode_mp3(data)
             samples_cut, _ = decode_mp3(data, desired_samples=44000)
@@ -37,16 +36,18 @@ class DecodeMp3Test(tf.test.TestCase):
 
     def test_decode_mp3_pad_samples(self):
         with self.session():
-            data = tf.io.read_file("../../testfiles/sine440_cbr128.mp3")
+            data = tf.io.read_file("../../../testfiles/sine440_cbr128.mp3")
 
             samples_original, _ = decode_mp3(data)
             samples_padded, _ = decode_mp3(data, desired_samples=44200)
 
             self.assertAllEqual(samples_padded.shape, [1, 44200])
             # existing samples should be completely decoded
-            self.assertAllEqual(samples_padded[:,:44100], samples_original)
+            self.assertAllEqual(samples_padded[:, :44100], samples_original)
             # missing samples should be filled with zeros
-            self.assertAllEqual(samples_padded[0,44100:], tf.zeros(100))
+            self.assertAllEqual(samples_padded[0, 44100:], tf.zeros(100))
+
+    # TODO: add tests for stereo files
 
 
 if __name__ == "__main__":

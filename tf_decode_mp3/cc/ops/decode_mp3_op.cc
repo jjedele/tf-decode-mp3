@@ -40,7 +40,7 @@ Status DecodeMp3ShapeFn(InferenceContext *c) {
 }
 
 REGISTER_OP("DecodeMp3")
-    .Input("encoded: string")
+    .Input("contents: string")
     .Attr("desired_channels: int = -1")
     .Attr("desired_samples: int = -1")
     .Output("samples: float32")
