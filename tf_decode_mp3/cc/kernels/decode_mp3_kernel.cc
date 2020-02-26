@@ -22,14 +22,17 @@ public:
     const string &input_data = input_tensor.scalar<tstring>()();
 
     // initialize mp3 decoder
-    static mp3dec_t mp3dec;
+    mp3dec_t mp3dec;
     mp3dec_init(&mp3dec);
 
     // decode mp3
-    static mp3dec_file_info_t mp3;
+    mp3dec_file_info_t mp3;
     mp3dec_load_buf(&mp3dec, (const uint8_t *)input_data.data(),
                     input_data.size(), &mp3, NULL /* progress callback */,
                     NULL /* user data */);
+
+    // TODO: add better error handling
+    // if MP3 can not be parsed, mp3.channels will be 0 and cause a floating point exception in downstream divisions
 
     // some bookkeeping for generating the output
     int target_channels = desired_channels < 0 ? mp3.channels : desired_channels;
