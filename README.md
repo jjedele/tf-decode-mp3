@@ -30,8 +30,8 @@ Only local installation supported so far.
 
 The `decode_mp3` function has two additional parameters:
 
-* `desired_channels`: Fix how many channels are returned. If the file contains more, only the first will be used. If the file contains less, they will be duplicated.
-* `desired_samples`: Fix how many samples are returned per channel. If the file contains more, the surplus is thrown away. If the file contains less, it will be padded with 0s on the right.
+* `desired_channels`: Fix how many channels are returned. If the file contains more, only the first is returned. If the file contains less, they are duplicated.
+* `desired_samples`: Fix how many samples are returned per channel. If the file contains more, the surplus is thrown away. If the file contains less, they are padded on the right with 0s.
 
 
 ## Acknowledgements
