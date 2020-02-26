@@ -68,6 +68,9 @@ public:
         std::memset(target + to_copy, 0, to_fill);
       }
     }
+
+    // clean up
+    free((void *) mp3.buffer);
   }
 
 private:
