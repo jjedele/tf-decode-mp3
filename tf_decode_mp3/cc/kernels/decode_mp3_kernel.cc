@@ -27,6 +27,7 @@ public:
 
     // decode mp3
     mp3dec_file_info_t mp3;
+    memset(&mp3, 0x00, sizeof(mp3dec_file_info_t));
     mp3dec_load_buf(&mp3dec, (const uint8_t *)input_data.data(),
                     input_data.size(), &mp3, NULL /* progress callback */,
                     NULL /* user data */);
@@ -60,12 +61,12 @@ public:
       float *source = mp3.buffer + (channel % mp3.channels) * single_channel_samples;
 
       int to_copy = std::min(single_channel_samples, target_samples);
-      std::memcpy(target, source, to_copy);
+      std::memcpy(target, source, to_copy * sizeof(float));
 
       // fill rest with 0s if necessary
       int to_fill = target_samples - to_copy;
       if (to_fill > 0) {
-        std::memset(target + to_copy, 0, to_fill);
+        std::memset(target + to_copy, 0, to_fill * sizeof(float));
       }
     }
 
